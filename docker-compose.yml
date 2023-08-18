@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  postgres-service:
+    image: postgres
+    container_name: postgres_db
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres123
+    ports:
+      - 15432:5432
+    volumes:
+      - /home/alexandre/docker-volume/PostgreSQL:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "alexandre@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "admin123"
+    ports:
+      - 16543:80
+    depends_on:
+      - postgres-service
